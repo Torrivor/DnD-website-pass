@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja</title>
+    <link rel="stylesheet" href="???">        <!--Dodac CSS -->
+</head>
+<body>
+    <h1>Rejestracja</h1>
+
+    <form method="POST" action="/register">
+        <input type="text" name="username" placeholder="Postać/Login" required><br/>
+        <input type="password" name="password" placeholder="Hasło" required><br/>
+        <input type="password" name="confirmPassword" placeholder="Potwierdz Hasło" required /><br/>
+        <select name="characterClass" required>
+            <option value="" disabled selected>Wybierz klasę postaci</option>
+            <option value="Fighter">Wojownik</option>
+            <option value="mage">Mag</option>
+            <option value="rogue">Łotrzyk</option>
+            <option value="cleric">Kleryk</option>
+            <option value="ranger">Łowca</option>
+            <option value="paladin">Paladyn</option>
+            <option value="druid">Druid</option>
+            <option value="bard">Bard</option>
+            <option value="sorcerer">Zaklinacz</option>
+            <option value="warlock">Czarownik</option>
+            <option value="monk">Mnich</option>
+            <option value="barbarian">Berserker</option>
+        </select>
+        <button type="submit">Zarejestruj</button>
+    </form>
+
+    <form action="/login.html" method="get">
+        <button type="submit">Zaloguj</button>
+    </form>
+</body>
