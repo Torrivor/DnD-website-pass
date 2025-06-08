@@ -1,0 +1,23 @@
+{
+  "name": "dnd-website-pass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Torrivor/DnD-website-pass.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Torrivor/DnD-website-pass/issues"
+  },
+  "homepage": "https://github.com/Torrivor/DnD-website-pass#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
