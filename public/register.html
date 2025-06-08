@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
-    <link rel="stylesheet" href="???">        <!--Dodac CSS -->
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <h1>Rejestracja</h1>
-
-    <form method="POST" action="/register">
-        <input type="text" name="username" placeholder="Postać/Login" required><br/>
+    <form class="login-form" method="POST" action="/register">
+        <input type="text" name="username" placeholder="Nazwa Postaci/Login" required><br/>
         <input type="password" name="password" placeholder="Hasło" required><br/>
         <input type="password" name="confirmPassword" placeholder="Potwierdz Hasło" required /><br/>
         <select name="characterClass" required>
@@ -27,11 +26,12 @@
             <option value="warlock">Czarownik</option>
             <option value="monk">Mnich</option>
             <option value="barbarian">Berserker</option>
-        </select>
-        <button type="submit">Zarejestruj</button>
+        </select><br/>
+        <button type="submit">Potwierdz Rejestracje</button>
     </form>
 
-    <form action="/login.html" method="get">
+    <form class="login-form" action="/login.html" method="get">
         <button type="submit">Zaloguj</button>
     </form>
 </body>
+</html>
