@@ -8,26 +8,41 @@
 </head>
 <body>
     <h1>Rejestracja</h1>
+
     <form class="login-form" method="POST" action="/register">
         <input type="text" name="username" placeholder="Nazwa Postaci/Login" required><br/>
         <input type="password" name="password" placeholder="Hasło" required><br/>
-        <input type="password" name="confirmPassword" placeholder="Potwierdz Hasło" required /><br/>
+        <input type="password" name="confirmPassword" placeholder="Potwierdź Hasło" required><br/>
+
         <select name="characterClass" required>
             <option value="" disabled selected>Wybierz klasę postaci</option>
             <option value="Fighter">Wojownik</option>
-            <option value="mage">Mag</option>
-            <option value="rogue">Łotrzyk</option>
-            <option value="cleric">Kleryk</option>
-            <option value="ranger">Łowca</option>
-            <option value="paladin">Paladyn</option>
-            <option value="druid">Druid</option>
-            <option value="bard">Bard</option>
-            <option value="sorcerer">Zaklinacz</option>
-            <option value="warlock">Czarownik</option>
-            <option value="monk">Mnich</option>
-            <option value="barbarian">Berserker</option>
+            <option value="Mage">Mag</option>
+            <option value="Rogue">Łotrzyk</option>
+            <option value="Cleric">Kleryk</option>
+            <option value="Ranger">Łowca</option>
+            <option value="Paladin">Paladyn</option>
+            <option value="Druid">Druid</option>
+            <option value="Bard">Bard</option>
+            <option value="Sorcerer">Zaklinacz</option>
+            <option value="Warlock">Czarownik</option>
+            <option value="Monk">Mnich</option>
+            <option value="Barbarian">Berserker</option>
         </select><br/>
-        <button type="submit">Potwierdz Rejestracje</button>
+
+        <select name="race" required>
+            <option value="" disabled selected>Wybierz rasę postaci</option>
+            <option value="Elf">Elf</option>
+            <option value="Krasnolud">Krasnolud</option>
+            <option value="Człowiek">Człowiek</option>
+            <option value="Niziołek">Niziołek</option>
+            <option value="Ork">Ork</option>
+            <option value="Gnom">Gnom</option>
+            <option value="Tiefling">Tiefling</option>
+            <option value="Dragonborn">Dragonborn</option>
+        </select><br/>
+
+        <button type="submit">Potwierdź Rejestrację</button>
     </form>
 
     <form class="login-form" action="/login.html" method="get">
