@@ -1,4 +1,5 @@
 const pool = require('./ps-db');
+const bcrypt = require('bcrypt');
 
 async function createTables() {
   try {
@@ -8,11 +9,12 @@ async function createTables() {
         id SERIAL PRIMARY KEY,
         username VARCHAR(50) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
-        character_class VARCHAR(50) NOT NULL
+        character_class VARCHAR(50) NOT NULL,
+        is_admin BOOLEAN DEFAULT false
       );
     `);
 
-    // Tabela postaci (związana z użytkownikiem)
+    // Tabela postaci
     await pool.query(`
       CREATE TABLE IF NOT EXISTS characters (
         id SERIAL PRIMARY KEY,
@@ -28,11 +30,12 @@ async function createTables() {
         con INT DEFAULT 10,
         int INT DEFAULT 10,
         wis INT DEFAULT 10,
-        cha INT DEFAULT 10
+        cha INT DEFAULT 10,
+        unassigned_points INT DEFAULT 0
       );
     `);
 
-    // Tabela sesji (connect-pg-simple)
+    // Tabela sesji
     await pool.query(`
       CREATE TABLE IF NOT EXISTS "session" (
         "sid" varchar NOT NULL COLLATE "default",
@@ -42,15 +45,25 @@ async function createTables() {
       );
     `);
 
-    // Indeks na kolumnę expire
     await pool.query(`
       CREATE INDEX IF NOT EXISTS "IDX_session_expire" ON "session" ("expire");
     `);
 
-    console.log('Tabele zostały utworzone pomyślnie!');
+    // Tworzenie użytkownika admin
+    const adminUsername = 'admin';
+    const adminPassword = 'admin';
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+
+    await pool.query(`
+      INSERT INTO users (username, password, character_class, is_admin)
+      VALUES ($1, $2, $3, true)
+      ON CONFLICT (username) DO NOTHING
+    `, [adminUsername, hashedPassword, 'GM']);
+
+    console.log('✅ Tabele i konto admina zostały utworzone pomyślnie!');
     process.exit(0);
   } catch (error) {
-    console.error('Błąd podczas tworzenia tabel:', error);
+    console.error('❌ Błąd podczas tworzenia tabel lub admina:', error);
     process.exit(1);
   }
 }

@@ -16,5 +16,20 @@
     <form class="login-form" action="/register.html" method="get">
         <button type="submit">Zarejestruj</button>
     </form>
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('registered') === '1') {
+        const msg = document.createElement('div');
+        msg.textContent = '✅ Pomyślnie zarejestrowano! Możesz się teraz zalogować.';
+        msg.style.background = '#d4edda';
+        msg.style.color = '#155724';
+        msg.style.border = '1px solid #c3e6cb';
+        msg.style.padding = '10px';
+        msg.style.marginBottom = '15px';
+        msg.style.borderRadius = '5px';
+        document.body.insertBefore(msg, document.body.firstChild);
+        }
+    </script>
+
 </body>
 </html>

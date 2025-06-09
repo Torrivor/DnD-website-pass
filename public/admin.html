@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Administratora</title>
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+  body {
+    padding: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #181a1b;
+    color: #f1f1f1;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffd700;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 8px #000;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #23272a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px #0006;
+  }
+  th, td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+  }
+  th {
+    background: #2c2f33;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 2px solid #ffd700;
+  }
+  tr:nth-child(even) {
+    background: #202225;
+  }
+  tr:hover {
+    background: #36393f;
+    transition: background 0.2s;
+  }
+  button {
+    padding: 6px 14px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    background: #ffd700;
+    color: #23272a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 1px 4px #0003;
+  }
+  button:hover {
+    background: #fffbe6;
+    color: #111;
+  }
+</style>
+</head>
+<body>
+  <h1>Panel Administratora</h1>
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>Użytkownik</th>
+        <th>Klasa</th>
+        <th>Postać</th>
+        <th>Rasa</th>
+        <th>Lvl</th>
+        <th>Punkty do rozdania</th>
+        <th>Akcje</th>
+      </tr>
+    </thead>
+    <tbody id="userBody">
+    </tbody>
+  </table>
+
+  <script>
+    async function loadUsers() {
+      const res = await fetch('/admin/users');
+      const data = await res.json();
+
+      const tbody = document.getElementById('userBody');
+      tbody.innerHTML = '';
+
+      data.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.username}</td>
+          <td>${row.character_class}</td>
+          <td>${row.name}</td>
+          <td>${row.race}</td>
+          <td>${row.level}</td>
+          <td>${row.unassigned_points}</td>
+          <td>
+            <button onclick="levelUp(${row.character_id})">+Lvl</button>
+            <button onclick="editStats(${row.character_id})">Statystyki</button>
+            <button onclick="editCharacter(${row.character_id})">Edytuj</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function levelUp(characterId) {
+      const res = await fetch(`/admin/level-up/${characterId}`, { method: 'POST' });
+      if (res.ok) {
+        alert('Poziom zwiększony +2 punkty umiejętności!');
+        loadUsers();
+      } else {
+        alert('Błąd przy zwiększaniu poziomu');
+      }
+    }
+
+    function editStats(characterId) {
+      const stat = prompt("Wpisz nazwę statystyki (str, dex, con, int, wis, cha):");
+      let amount = prompt("Ile punktów chcesz dodać?");
+      amount = parseInt(amount, 10); // Zamiana na liczbę
+      if (!stat || isNaN(amount) || amount <= 0) {
+        alert("Niepoprawne dane!");
+        return;
+      }
+      fetch(`/admin/add-stat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ characterId, stat, amount })
+      }).then(res => {
+        if (res.ok) {
+          alert("Zmieniono statystykę");
+          loadUsers();
+        } else {
+          res.text().then(text => alert("Błąd: " + text));
+        }
+      });
+    }
+
+    loadUsers();
+        function editCharacter(characterId) {
+      const fields = prompt("Podaj pole i wartość do zmiany (np:class=Wojownik, race=Elf, level=10):");
+      if (!fields) return;
+      const obj = {};
+      fields.split(',').forEach(pair => {
+        const [key, value] = pair.split('=').map(s => s.trim());
+        if (key && value !== undefined) {
+          obj[key] = isNaN(value) ? value : Number(value);
+        }
+      });
+      fetch('/admin/edit-character', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ characterId, fields: obj })
+      }).then(res => {
+        if (res.ok) {
+          alert("Zmieniono dane postaci");
+          loadUsers();
+        } else {
+          res.text().then(text => alert("Błąd: " + text));
+        }
+      });
+    }
+  </script>
+</body>
+</html>
