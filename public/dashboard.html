@@ -39,12 +39,15 @@
     }
 
     .avatar {
-      width: 120px;
-      height: 120px;
+      width: 150px;
+      height: 200px;
       margin: 10px auto;
-      border-radius: 12px;
-      object-fit: cover;
+      border-radius: 16px;
+      object-fit: contain; /* changed from cover to contain */
+      background: #222;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+      border: 2px solid #444;
+      display: block;
     }
 
     .stats-box {
@@ -167,9 +170,18 @@
 
   // Mapowanie klas na obrazki
   const classImages = {
-    Wojownik: '/images/warrior.png',
-    Mag: '/images/mag.png',
+    Wojownik: '/images/fighter.png',
+    Mage: '/images/wizard.png',
     Łotrzyk: '/images/rogue.png',
+    Kleryk: '/images/cleric.png',
+    Łowca: '/images/ranger.png',
+    Paladyn: '/images/paladin.png',
+    Druid: '/images/druid.png',
+    Bard: '/images/bard.png',
+    Zaklinacz: '/images/sorcerer.png',
+    Czarownik: '/images/warlock.png',
+    Mnich: '/images/monk.png',
+    Barbarzyńca: '/images/barbarian.png',
     // Dodaj inne klasy według potrzeb
   };
   // Mapowanie ras na obrazki
@@ -177,6 +189,11 @@
     Elf: '/images/elf.png',
     Krasnolud: '/images/dwarf.png',
     Człowiek: '/images/human.png',
+    Niziołek: '/images/halfling.png',
+    Ork: '/images/orc.png',
+    Gnom: '/images/gnome.png',
+    Tiefling: '/images/tiefling.png',
+    Dragonborn: '/images/dragonborn.png',
     // Dodaj inne rasy według potrzeb
   };
 

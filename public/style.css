@@ -79,3 +79,61 @@ h1 {
     color: #f0f0f0;
     background: #232323;
 }
+/* admin panel styles */
+body.admin-panel {
+    padding: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #181a1b;
+    color: #f1f1f1;
+}
+body.admin-panel h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffd700;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 8px #000;
+}
+body.admin-panel table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #23272a;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px #0006;
+}
+body.admin-panel th, body.admin-panel td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+}
+body.admin-panel th {
+    background: #2c2f33;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 2px solid #ffd700;
+}
+body.admin-panel tr:nth-child(even) {
+    background: #202225;
+}
+body.admin-panel tr:hover {
+    background: #36393f;
+    transition: background 0.2s;
+}
+body.admin-panel button {
+    padding: 6px 14px;
+    margin: 2px;
+    border: none;
+    border-radius: 5px;
+    background: #ffd700;
+    color: #23272a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 1px 4px #0003;
+}
+body.admin-panel button:hover {
+    background: #fffbe6;
+    color: #111;
+}
